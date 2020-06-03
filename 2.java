@@ -170,4 +170,14 @@ public class GetDiffAndEntities {
             System.out.println(entityInfoObject.getStartLineNumber()+" "+entityInfoObject.getEndLineNumber()+" "+entityInfoObject.getEntityName());
         }
     }
+    
+		private static String extractInt(String str) {
+			str = str.replaceAll("[^\\d]", " "); 
+            str = str.trim(); 
+            str = str.replaceAll(" +", " "); 
+            if (str.equals("")) 
+                return "-1"; 
+            return str;
+            
+		}
 }
