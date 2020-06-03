@@ -96,64 +96,7 @@ public class DiffFilesInCommit {
                                     	RevisedM.add(WordsOfLine[2]); 
                                 	}
                                 }
-                                else if(WordsOfLine[0].contentEquals("ADD") && (WordsOfLine[2].endsWith(".java"))  )
-							 	{
-                                 File OringinalFile = new File("C:\\Users\\rkanchug\\Desktop\\Original.java");
-	                             File RevisedFile = new File("C:\\Users\\rkanchug\\Desktop\\Revised.java");
-								 PrintStream RF = new PrintStream(RevisedFile);
-								 PrintStream OF = new PrintStream(OringinalFile);
-								 System.setOut(OF);
-								 System.out.println(" ");
-								 System.setOut(console);
-								 String D = WordsOfLine[2];
-								 System.setOut(console);
-	                             System.out.println("A"+D);
-	                            
-                                 try (TreeWalk treeWalk = new TreeWalk(repository)) 
-								 {
-									treeWalk.addTree(presenttree);
-									treeWalk.setRecursive(false);
-									FileLink = D;
-                                    String[] splitPath = D.split("/");
-                                    int lengthOfSplitPath = splitPath.length;
-                                    int indexOfSplitPath = 0;
-									 while(treeWalk.next())
-	                                    {
-	                                    	String treeName = treeWalk.getNameString();
-	                                    	if(treeName.equals(splitPath[indexOfSplitPath]))
-	                                    	{
-	                                    		indexOfSplitPath++;
-	                                    		if(indexOfSplitPath == lengthOfSplitPath)
-	                                    		{
-	                                    			FileName = treeName;
-	                                    			ObjectId objectId = treeWalk.getObjectId(0);
-	                                                ObjectLoader loader = repository.open(objectId);
-	                                                System.setOut(RF);
-	                                                loader.copyTo(System.out);
-	                                    			break;
-	                                    		}
-	                                    		else
-	                                    		{
-	                                    			treeWalk.enterSubtree();
-	                                    		}
-	                                    	}
-	                                    }   
-								  }
-                                 System.setOut(console);
-                                 String ErrorString = "EvaluationPlanContext.java";
-                                 if(!FileName.equals(ErrorString)){
-                                 graph_diff g = new graph_diff();  
-		                         String Entities = g.main(null);
-		                         Tokenize t = new Tokenize(fileCount); 
-								 String tokesOfTheFile = t.main(null); 
-								 String CommitMessage = previouscommit.getFullMessage();
-								 CommitMessage = CommitMessage.replaceAll("\n", " ").replace("\r", "");
-			                     System.setOut(TokensStream);
-			                     System.out.println("{\"index\":{\"_id\":\"" + fileCount + "\"}}");
-								 System.out.println("{\"build_id\":\"" + buildId + "\",\"commit_id\":\"" + objId + "\",\"package_name\":\"" + packageName +"\",\"package_link\":\"" + REMOTE_URL  + "\",\"file_name\":\"" + FileName +"\",\"file_link\":\"" + FileLink +"\",\"file_date\":\"" + FileDate + "\",\"entities\":\"" + Entities +"\",\"commit_msg\":\""+CommitMessage +"\",\"diff_file\":\"" + tokesOfTheFile + "\"}"   );
-			                     fileCount++;}
-								 }
-							 	 else if(WordsOfLine[0].equals("DELETE")&& (WordsOfLine[1].endsWith(".java") ) )
+                                else if(WordsOfLine[0].equals("DELETE")&& (WordsOfLine[1].endsWith(".java") ) )
 							 	 { 
 							 	  File OringinalFile = new File("C:\\Users\\rkanchug\\Desktop\\Original.java");
 	                              File RevisedFile = new File("C:\\Users\\rkanchug\\Desktop\\Revised.java");
